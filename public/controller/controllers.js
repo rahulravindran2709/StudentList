@@ -1,30 +1,28 @@
-var myApp = angular.module('myApp', []);
-myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
+angular.module('myApp').controller('StudentController', ['$scope', 'StudentService', function($scope, StudentService) {
     console.log("Hello World from controller");
-
-
-var refresh = function() {
-  $http.get('/studentlist').success(function(response) {
-    console.log("I got the data I requested");
-    $scope.studentlist = response;
-    $scope.student = "";
+var init = function() {
+  $scope.newStudent={};
+  $scope.studentList=[];
+  StudentService.getAllStudents().then(function(students){
+    $scope.studentList=students;
   });
 };
 
-refresh();
+init();
 
 $scope.addStudent = function() {
-  console.log($scope.student);
-  $http.post('/studentlist', $scope.student).success(function(response) {
-    console.log(response);
-    refresh();
+  console.log($scope.newStudent);
+  StudentService.addStudent($scope.newStudent).then(function(response){
+    var newStudentRef=angular.copy($scope.newStudent);
+    $scope.studentList.push(newStudentRef);
+    $scope.newStudent={};
   });
 };
 
-$scope.remove = function(id) {
-  console.log(id);
-  $http.delete('/studentlist/' + id).success(function(response) {
-    refresh();
+$scope.remove = function(studentData) {
+  console.log('In delete'+studentData.id);
+  StudentService.deleteStudent(studentData.id).then(function(){
+    $scope.studentList.splice($scope.studentList.indexOf(studentData),1);
   });
 };
 

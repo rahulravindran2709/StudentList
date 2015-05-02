@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
-app.get('/studentlist', function (req, res) {
+app.get('/students', function (req, res) {
   console.log('I received a GET request');
 
   db.studentlist.find(function (err, docs) {
@@ -18,14 +18,14 @@ app.get('/studentlist', function (req, res) {
   });
 });
 
-app.post('/studentlist', function (req, res) {
+app.post('/students', function (req, res) {
   console.log(req.body);
   db.studentlist.insert(req.body, function(err, doc) {
     res.json(doc);
   });
 });
 
-app.delete('/studentlist/:id', function (req, res) {
+app.delete('/students/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
   db.studentlist.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
@@ -33,7 +33,7 @@ app.delete('/studentlist/:id', function (req, res) {
   });
 });
 
-app.get('/studentlist/:id', function (req, res) {
+app.get('/students/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
   db.studentlist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
@@ -41,7 +41,7 @@ app.get('/studentlist/:id', function (req, res) {
   });
 });
 
-app.put('/studentlist/:id', function (req, res) {
+app.put('/students/:id', function (req, res) {
   var id = req.params.id;
   console.log(req.body.name);
   db.studentlist.findAndModify({

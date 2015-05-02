@@ -6,11 +6,10 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
   <title>Student List App</title>
 </head>
 <body>
-  <div class="container" ng-controller="AppCtrl">
+  <div class="container" ng-controller="StudentController">
     <h1>Student List App</h1>
 
     <table class="table">
@@ -25,24 +24,26 @@
       </thead>
       <tbody>
         <tr>
-          <td><input class="form-control" ng-model="student.name"></td>
-          <td><input class="form-control" ng-model="student.email"></td>
-          <td><input class="form-control" ng-model="student.number"></td>
+          <td><input class="form-control" ng-model="newStudent.name"></td>
+          <td><input class="form-control" ng-model="newStudent.email"></td>
+          <td><input class="form-control" ng-model="newStudent.number"></td>
           <td><button class="btn btn-primary" ng-click="addStudent()">Add Student</button></td>
-          <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+          <td><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
-        <tr ng-repeat="student in studentlist">
+        <tr ng-repeat="student in studentList">
           <td>{{student.name}}</td>
           <td>{{student.email}}</td>
           <td>{{student.number}}</td>
-          <td><button class="btn btn-danger" ng-click="remove(student._id)">Remove</button></td>
-          <td><button class="btn btn-warning" ng-click="edit(student._id)">Edit</button></td>
+          <td><button class="btn btn-danger" ng-click="remove(student)">Remove</button></td>
+          <td><button class="btn btn-warning" ng-click="edit(student)">Edit</button></td>
         </tr>
       </tbody>
     </table>
 
   </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
-<script src="controllers/controller.js"></script>
+<script src="angular.min.js"></script>
+<script src="app.js"></script>
+<script src="controller/controllers.js"></script>
+<script src="services/studentservice.js"></script>
 </body>
 </html>
