@@ -1,2 +1,2 @@
 # StudentList
-Mean Stack 
+Mean Stack sample application for displaying student data
