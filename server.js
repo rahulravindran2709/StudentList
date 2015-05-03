@@ -35,7 +35,7 @@ app.delete('/students/:id', function (req, res) {
 
 app.get('/students/:id', function (req, res) {
   var id = req.params.id;
-  console.log(id);
+  console.log('In get by id'+id);
   db.studentlist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
     res.json(doc);
   });

@@ -12,48 +12,13 @@
 <body>
   <div class="container" ng-controller="StudentController">
     <h1>Student List App</h1>
-
-      <div class="row">
-          <div class="col-lg-3">Name</div>         
-          <div class="col-lg-3">Email</div>
-          <div class="col-lg-3">Number</div>
-          <div class="col-lg-3">Action</div>
-
-      </div>
       <hr>
-        <div class="row">
-        <form class="form">
-          <div class="form-group"><div class="col-lg-3"><input class="form-control" ng-model="newStudent.name"></div></div>
-          <div class="form-group"><div class="col-lg-3"><input class="form-control" ng-model="newStudent.email"></div></div>
-          <div class="form-group"><div class="col-lg-3"><input class="form-control" ng-model="newStudent.number"></div></div>
-          <div class="form-group"><div class="col-lg-2"><button class="btn btn-primary btn-block" ng-click="addStudent()">Add Student</button></div></div>
-          <div class="form-group"><div class="col-lg-1"><button class="btn btn-info btn-block" ng-click="deselect()">Clear</button></div></div>
-          </form>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div ng-repeat="student in studentList" class="row marginTop10">
-              <div ng-show="student.isEditable==true">
-              <form class="form">
-                <div class="form-group"><div class="col-lg-3"><input class="form-control" ng-model="student.name" /></div></div>
-                <div class="form-group"><div class="col-lg-3"><input class="form-control" ng-model="student.email" /></div></div>
-                <div class="form-group"><div class="col-lg-3"><input class="form-control" ng-model="student.number" /></div></div>
-                <div class="form-group"><div class="col-lg-3"><button class="btn btn-warning btn-block" ng-click="update(student)">Save</button></div></div>
-              </form>
-              </div>
-              <div ng-hide="student.isEditable==true">
-                <div class="col-lg-3">{{student.name}}</div>
-                <div class="col-lg-3">{{student.email}}</div>
-                <div class="col-lg-3">{{student.number}}</div>
-                <div class="col-lg-2"><button class="btn btn-danger btn-block" ng-click="remove(student)">Remove</button></div>
-                <div class="col-lg-1"><button class="btn btn-warning btn-block" ng-click="edit(student)">Edit</button></div>
-              </div>
-            </div>
-            </div>
-        </div>
+      <div ng-view></div>
+        
 
   </div>
 <script src="angular.min.js"></script>
+<script src="angular-route.js"></script>
 <script src="app.js"></script>
 <script src="controller/controllers.js"></script>
 <script src="services/studentservice.js"></script>
