@@ -10,7 +10,7 @@ var addStudentFn=function(studentdata){
 }
 var updateStudentFn=function(studentdata){
 	var deferred=$q.defer();
-	$http.put(routeConstants.STUDENT_BASE_PREFIX,studentdata).then(function(response){
+	$http.put(routeConstants.STUDENT_BASE_PREFIX+studentdata._id,studentdata).then(function(response){
 		deferred.resolve(response.data)
 	},function(error){
 		deferred.reject(error);

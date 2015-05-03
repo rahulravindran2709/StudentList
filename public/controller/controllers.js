@@ -1,10 +1,19 @@
 angular.module('myApp').controller('StudentController', ['$scope', 'StudentService', function($scope, StudentService) {
     console.log("Hello World from controller");
+    var populateStudents=function(list){
+      var students=[];
+      
+      return students;
+    }
 var init = function() {
   $scope.newStudent={};
   $scope.studentList=[];
   StudentService.getAllStudents().then(function(students){
-    $scope.studentList=students;
+    angular.forEach(students,function(elem,index){
+        this.push(elem);
+        this[index].isEditable=false;
+        console.log('value of field'+this[index].isEditable);
+      },$scope.studentList);
   });
 };
 
@@ -20,24 +29,22 @@ $scope.addStudent = function() {
 };
 
 $scope.remove = function(studentData) {
-  console.log('In delete'+studentData.id);
-  StudentService.deleteStudent(studentData.id).then(function(){
+  console.log('In delete'+studentData._id);
+  StudentService.deleteStudent(studentData._id).then(function(){
     $scope.studentList.splice($scope.studentList.indexOf(studentData),1);
   });
 };
 
-$scope.edit = function(id) {
-  console.log(id);
-  $http.get('/studentlist/' + id).success(function(response) {
-    $scope.student = response;
-  });
+$scope.edit = function(student) {
+  student.isEditable=true;
 };  
 
-$scope.update = function() {
-  console.log($scope.student._id);
-  $http.put('/studentlist/' + $scope.student._id, $scope.student).success(function(response) {
-    refresh();
-  })
+$scope.update = function(studentData) {
+  console.log(studentData._id);
+  StudentService.updateStudent(studentData).then(function(){
+    studentData.isEditable=false;
+  });
+
 };
 
 $scope.deselect = function() {
