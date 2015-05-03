@@ -14,6 +14,7 @@
           <hr>
             <div ng-repeat="student in studentList" class="row marginTop10">
                <div class="col-lg-3">{{$index+1}}.&nbsp;<a ng-bind="student.name" href="/#/studentDetails/{{student._id}}"></a></div>
+               <div class="col-lg-2"><button class="btn btn-danger btn-block" ng-click="remove(student)">Remove</button></div>
             </div>
 
             </div>
